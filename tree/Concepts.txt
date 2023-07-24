@@ -1,0 +1,10 @@
+Properties of Binary Trees
+
+=> Maximun nodes at level L = 2^L;
+a) level always start from level = 0;
+
+
+=> Maximum nodes in a tree of height H = 2^H - 1;
+a) total no.of levels = height of the tree;
+b) levels start from level = 1;
+
