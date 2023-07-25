@@ -1,5 +1,5 @@
 //Print all even numbers available in the array.
-
+//checking commit for array
 #include<iostream>
 using namespace std;
 
