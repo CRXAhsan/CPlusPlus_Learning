@@ -37,7 +37,7 @@ int main()
 	// calling class and make an object named as "c1"
 	Calculations c1;
 	
-	cout<<"Enter a integer number. "<<endl;
+	cout<<"Enter a integer number : "<<endl;
 	cin>>num;
 	
 	// calling functions to perform calculation
