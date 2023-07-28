@@ -1,80 +1,73 @@
-#include<iostream>
-#include<string>
-#include<fstream>
+#include <iostream>
+#include <string>
+#include <fstream>
 using namespace std;
 
 class Person
 {
-    protected:
-        string username, password,confirmPassword, str;
-        
-    public:
-        ifstream read;
-        ofstream write;
+protected:
+    string username, password, confirmPassword, str;
+
+public:
+    ifstream read;
+    ofstream write;
 
     Person()
     {
-        username="";
-        password="";
+        username = "";
+        password = "";
     }
 
-        void login()
+    void login()
+    {
+        cout << "Enter Username: ";
+        cin >> username;
+        fflush(stdin);
+        cout << "Enter Password: ";
+        cin >> password;
+        fflush(stdin);
+    }
+
+    string login_newAccount()
+    {
+        do
         {
-            cout<<"Enter Username: ";
-            cin >>username;
+            cout << "Enter Username: ";
+            cin >> username;
             fflush(stdin);
-            cout<<"Enter Password: ";
-            cin >>password;
+            cout << "Enter Password: ";
+            cin >> password;
             fflush(stdin);
-            
-        }
-
-        string login_newAccount()
-        {
-            do
-            {
-            cout<<"Enter Username: ";
-            cin >>username;
-            fflush(stdin);
-            cout<<"Enter Password: ";
-            cin >>password;
-            fflush(stdin);
-            cout<<"Enter Password: ";
-            cin >>confirmPassword;
+            cout << "Enter Password: ";
+            cin >> confirmPassword;
             fflush(stdin);
 
-            } 
-            while (password == confirmPassword);
+        } while (password == confirmPassword);
 
-            str = username + " " + password;
-            return str;
-        }
+        str = username + " " + password;
+        return str;
+    }
 
-
-    
-     void menu(){}
+    void menu() {}
 };
 
 class admin : public Person
 {
-    private:
-        string actualUser, actualPassword;
-        
-        
-    public:
+private:
+    string actualUser, actualPassword;
 
-        admin()
-        {
-            
-        }
+public:
+    admin()
+    {
+    }
 
-        void checkAdmin()
+    void checkAdmin()
+    {
+        int repeat = 0;
+        do
         {
-            int repeat=0;
-            do
-            {
-                login();
-            
+            login();
+
             read.open("admin.txt", ios::in);
 
             if (read.is_open())
@@ -83,150 +76,149 @@ class admin : public Person
                 {
                     int start, end;
 
-                    start=0;
-                    end = str.find(" ",start);
-                    actualUser = str.substr(start, end-start);
-                    start=end+1;
-                    end = str.find(" ",start);
-                    actualPassword = str.substr(start, end-start);
+                    start = 0;
+                    end = str.find(" ", start);
+                    actualUser = str.substr(start, end - start);
+                    start = end + 1;
+                    end = str.find(" ", start);
+                    actualPassword = str.substr(start, end - start);
                     if (actualUser == username)
                     {
-                        if(actualPassword == password)
+                        if (actualPassword == password)
                         {
                             repeat++;
                         }
                         else
                         {
-                            cout<<"You enter wrong password\n";
+                            cout << "You enter wrong password\n";
                         }
                     }
                     else
                     {
-                        cout<<"You enter wrong username\n";
+                        cout << "You enter wrong username\n";
                     }
                 }
             }
             else
             {
-                cout<<"[ERROR] FAILED TO OPEN FILE\n";
+                cout << "[ERROR] FAILED TO OPEN FILE\n";
             }
             read.close();
 
-            }
-            while (repeat == 0);
-        }        
+        } while (repeat == 0);
+    }
 
-        void menu()
+    void menu()
+    {
+        int choice;
+        cout << "What do you want to do? \n";
+        cout << "1. Display all Sellers \n";
+        cout << "2. Display all Buyers \n";
+        cout << "3. Display Properties \n";
+        cin >> choice;
+        switch (choice)
         {
-            int choice;
-            cout<<"What do you want to do? \n";
-            cout<<"1. Display all Sellers \n";
-            cout<<"2. Display all Buyers \n";
-            cout<<"3. Display Properties \n";
-            cin >>choice;
+        case 1:
+            displaySellers();
+            break;
+
+        case 2:
+            displayBuyers();
+            break;
+
+        case 3:
+            cout << "Which property listing you want to dispaly\n";
+            cout << "1. Plot \n";
+            cout << "2. House\n";
+            cout << "3. Flat \n";
+            cout << "4. Shop \n";
+            cin >> choice;
             switch (choice)
             {
             case 1:
-                displaySellers();
+                cout << "here are all plots\n";
                 break;
-            
+
             case 2:
-                displayBuyers();
+                cout << "here are all house\n";
                 break;
 
             case 3:
-                cout<<"Which property listing you want to dispaly\n";
-                cout<<"1. Plot \n";
-                cout<<"2. House\n";
-                cout<<"3. Flat \n";
-                cout<<"4. Shop \n";
-                cin >>choice;
-                switch (choice)
-                {
-                case 1:
-                    cout<<"here are all plots\n";
-                    break;
-                
-                case 2:
-                    cout<<"here are all house\n";
-                    break;
+                cout << "here are all flats\n";
+                break;
 
-                case 3:
-                    cout<<"here are all flats\n";
-                    break;
-                
-                case 4:
-                    cout<<"here are all shops\n";
-                    break;
-                }
+            case 4:
+                cout << "here are all shops\n";
                 break;
             }
+            break;
         }
+    }
 
-        void displaySellers()
+    void displaySellers()
+    {
+        system("cls");
+        cout << "#################### Sellers ####################\n";
+        cout << "#\t\t\t\t\t\t#\n";
+        read.open("seller.txt", ios::in);
+
+        if (read.is_open())
         {
-            system("cls");
-            cout<<"#################### Sellers ####################\n";
-            cout<<"#\t\t\t\t\t\t#\n";
-            read.open("seller.txt", ios::in);
-
-            if (read.is_open())
+            while (getline(read, str))
             {
-                while (getline(read, str)){
-                int start,end;
-                
-                start=0;
-                end = str.find(" ",start);
-                username = str.substr(start, end-start);
-                cout<<"# Username: "<<username;
-                
-                start=end+1;
-                end = str.find(" ",start);
-                password = str.substr(start, end-start);
-                cout<<"\t\t\t\t#\n# Password: "<<password;
-                cout<<"\t\t\t\t#\n#\t\t\t\t\t\t#\n";
-            }
-            }
-            else
-            {
-                cout<<"[ERROR] FAILED TO OPEN FILE\n";
-            }
+                int start, end;
 
-            read.close();
-            cout<<"#\t\t\t\t\t\t#\n";
-            cout<<"#################################################\n";
-            
+                start = 0;
+                end = str.find(" ", start);
+                username = str.substr(start, end - start);
+                cout << "# Username: " << username;
+
+                start = end + 1;
+                end = str.find(" ", start);
+                password = str.substr(start, end - start);
+                cout << "\t\t\t\t#\n# Password: " << password;
+                cout << "\t\t\t\t#\n#\t\t\t\t\t\t#\n";
+            }
         }
-
-        void displayBuyers()
+        else
         {
-            read.open("buyer.txt", ios::in);
-
-            if (read.is_open())
-            {
-                while (getline(read, str)){
-                int start,end;
-                
-                start=0;
-                end = str.find(" ",start);
-                username = str.substr(start, end-start);
-                cout<<"Username: "<<username<<endl;
-                
-                start=end+1;
-                end = str.find(" ",start);
-                password = str.substr(start, end-start);
-                cout<<"Password: "<<password<<endl<<endl;
-            }
-            }
-            else
-            {
-                cout<<"[ERROR] FAILED TO OPEN FILE\n";
-            }
-
-            read.close();
+            cout << "[ERROR] FAILED TO OPEN FILE\n";
         }
 
+        read.close();
+        cout << "#\t\t\t\t\t\t#\n";
+        cout << "#################################################\n";
+    }
 
+    void displayBuyers()
+    {
+        read.open("buyer.txt", ios::in);
+
+        if (read.is_open())
+        {
+            while (getline(read, str))
+            {
+                int start, end;
+
+                start = 0;
+                end = str.find(" ", start);
+                username = str.substr(start, end - start);
+                cout << "Username: " << username << endl;
+
+                start = end + 1;
+                end = str.find(" ", start);
+                password = str.substr(start, end - start);
+                cout << "Password: " << password << endl
+                     << endl;
+            }
+        }
+        else
+        {
+            cout << "[ERROR] FAILED TO OPEN FILE\n";
+        }
+
+        read.close();
+    }
 };
 
 int main()

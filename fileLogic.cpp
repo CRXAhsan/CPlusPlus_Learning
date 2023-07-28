@@ -1,5 +1,5 @@
 #include <iostream>
-#include<string>
+#include <string>
 #include <fstream>
 using namespace std;
 
@@ -36,28 +36,31 @@ int main()
     read.open("user.txt", ios::in);
     if (read.is_open())
     {
-        while (getline(read, str)){
-            int start,end;
-            cout<<str<<endl;
-            start=0;
-            end = str.find(" ",start);
-            fname = str.substr(start, end-start);
-            cout<<"First Name: "<<fname<<endl;
-            start = end+ 1;
-            end = str.find(" ",start);
-            lname = str.substr(start, end-start);
-            cout<<"Last Name: "<<lname<<endl;
-            start = end+ 1;
-            end = str.find(" ",start);
-            username = str.substr(start, end-start);
-            cout<<"Username: "<<username<<endl;
-            start = end+ 1;
-            end = str.find(" ",start);
-            password = str.substr(start, end-start);
-            cout<<"Password: "<<password<<endl;
+        while (getline(read, str))
+        {
+            int start, end;
+            cout << str << endl;
+            start = 0;
+            end = str.find(" ", start);
+            fname = str.substr(start, end - start);
+            cout << "First Name: " << fname << endl;
+            start = end + 1;
+            end = str.find(" ", start);
+            lname = str.substr(start, end - start);
+            cout << "Last Name: " << lname << endl;
+            start = end + 1;
+            end = str.find(" ", start);
+            username = str.substr(start, end - start);
+            cout << "Username: " << username << endl;
+            start = end + 1;
+            end = str.find(" ", start);
+            password = str.substr(start, end - start);
+            cout << "Password: " << password << endl;
         }
-    }else{
-        cout<<"[ERROR] FAILED TO OPEN FILE\n";
+    }
+    else
+    {
+        cout << "[ERROR] FAILED TO OPEN FILE\n";
     }
     read.close();
 }

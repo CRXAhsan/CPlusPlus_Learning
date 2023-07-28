@@ -1,96 +1,96 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
 
-template <typename T> 
+template <typename T>
 class Stack
 {
-    private:
-        int size;
-        int top;
-        T* arr;
-        
-    public:
-        Stack(int size)
-        {
-            this->size=size;
-            // dynamically allocate the memory so that we can make user defined array stack
-            arr = new T[size]; 
-            top=-1;
-        }
+private:
+    int size;
+    int top;
+    T *arr;
 
-        ~Stack()
-        {
-            //free the memory which we use for making our stack
-            delete[] arr;
-        }
+public:
+    Stack(int size)
+    {
+        this->size = size;
+        // dynamically allocate the memory so that we can make user defined array stack
+        arr = new T[size];
+        top = -1;
+    }
 
-        bool is_Empty()
-        {
-            if (top < 0 )
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            } 
-        }
+    ~Stack()
+    {
+        // free the memory which we use for making our stack
+        delete[] arr;
+    }
 
-        bool is_Full()
+    bool is_Empty()
+    {
+        if (top < 0)
         {
-            if (top < size)
-            {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
 
-                return true;
-            }
-            else
-            {
-                return false;
-            } 
-        }
+    bool is_Full()
+    {
+        if (top < size)
+        {
 
-        void push(T a)
-        {
-            if (!is_Full())
-            {
-                cout<<"#####  Stack Overflow  #####\n";
-            }
-            else
-            {
-                arr[++top] = a ;
-                cout<<arr[top]<<"  Pushed into Stack\n";
-            }
+            return true;
         }
+        else
+        {
+            return false;
+        }
+    }
 
-        // for adding any value to the stack
-        T pop()
+    void push(T a)
+    {
+        if (!is_Full())
         {
-            if (!is_Empty())
-            {
-                cout<<"#####  Stack Underflow  #####\n";
-            }
-            else
-            {
-                return arr[top--];
-            }
+            cout << "#####  Stack Overflow  #####\n";
         }
-        // for checking the value on the top of the stack
-        T peak()
+        else
         {
-            if (!is_Empty())
-            {
-                cout<<"#####  Stack is Empty  #####\n";
-            }
-            else
-            {
-                return arr[top];
-            }
+            arr[++top] = a;
+            cout << arr[top] << "  Pushed into Stack\n";
         }
+    }
 
-        void sizeOfStack()
+    // for adding any value to the stack
+    T pop()
+    {
+        if (!is_Empty())
         {
-            cout<<(top+1)<<" values in stack.\n";
+            cout << "#####  Stack Underflow  #####\n";
         }
+        else
+        {
+            return arr[top--];
+        }
+    }
+    // for checking the value on the top of the stack
+    T peak()
+    {
+        if (!is_Empty())
+        {
+            cout << "#####  Stack is Empty  #####\n";
+        }
+        else
+        {
+            return arr[top];
+        }
+    }
+
+    void sizeOfStack()
+    {
+        cout << (top + 1) << " values in stack.\n";
+    }
 };
 
 int Priority(char c)
@@ -114,12 +114,12 @@ void infixToPostfix(string exp)
     {
         char c = exp[i];
 
-        if (c == '(' )
+        if (c == '(')
         {
             s1.push(c);
         }
 
-        if ( (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || (c >= 0 && c <= 9) )
+        if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || (c >= 0 && c <= 9))
         {
             temp = temp + c;
         }
@@ -130,31 +130,28 @@ void infixToPostfix(string exp)
             {
                 /* code */
             }
-            
+
             s1.push(c);
         }
-        
 
-        if (c == ')' )
+        if (c == ')')
         {
-            while (s1.peak() != '(' )
+            while (s1.peak() != '(')
             {
                 temp = temp + s1.pop();
             }
             s1.pop();
         }
-        
     }
 
-    cout<<temp;
-    
+    cout << temp;
 }
 
 int main()
 {
     string expression;
-    cout<<"Enter string\n";
-    getline(cin , expression);
+    cout << "Enter string\n";
+    getline(cin, expression);
 
     expression = "(" + expression + ")";
 

@@ -4,109 +4,109 @@ infix expression to postfix*/
 #include <iostream>
 using namespace std;
 
-template <typename T> 
+template <typename T>
 class Stack
 {
-    private:
-        int size;
-        int top;
-        T* arr;
-        
-    public:
-        Stack(int size)
-        {
-            this->size=size;
-            // dynamically allocate the memory so that we can make user defined array stack
-            arr = new T[size]; 
-            top=-1;
-        }
+private:
+    int size;
+    int top;
+    T *arr;
 
-        ~Stack()
-        {
-            //free the memory which we use for making our stack
-            delete[] arr;
-        }
+public:
+    Stack(int size)
+    {
+        this->size = size;
+        // dynamically allocate the memory so that we can make user defined array stack
+        arr = new T[size];
+        top = -1;
+    }
 
-        bool is_Empty()
-        {
-            if (top < 0 )
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            } 
-        }
+    ~Stack()
+    {
+        // free the memory which we use for making our stack
+        delete[] arr;
+    }
 
-        bool is_Full()
+    bool is_Empty()
+    {
+        if (top < 0)
         {
-            if (top < size)
-            {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
 
-                return true;
-            }
-            else
-            {
-                return false;
-            } 
-        }
+    bool is_Full()
+    {
+        if (top < size)
+        {
 
-        void push(T a)
-        {
-            if (!is_Full())
-            {
-                cout<<"#####  Stack Overflow  #####\n";
-            }
-            else
-            {
-                arr[++top] = a ;
-                cout<<arr[top]<<"  Pushed into Stack\n";
-            }
+            return true;
         }
+        else
+        {
+            return false;
+        }
+    }
 
-        // for adding any value to the stack
-        T pop()
+    void push(T a)
+    {
+        if (!is_Full())
         {
-            if (!is_Empty())
-            {
-                cout<<"#####  Stack Underflow  #####\n";
-            }
-            else
-            {
-                return arr[top--];
-            }
+            cout << "#####  Stack Overflow  #####\n";
         }
-        // for checking the value on the top of the stack
-        T peak()
+        else
         {
-            if (!is_Empty())
-            {
-                cout<<"#####  Stack is Empty  #####\n";
-            }
-            else
-            {
-                return arr[top];
-            }
+            arr[++top] = a;
+            cout << arr[top] << "  Pushed into Stack\n";
         }
+    }
 
-        void sizeOfStack()
+    // for adding any value to the stack
+    T pop()
+    {
+        if (!is_Empty())
         {
-            cout<<(top+1)<<" values in stack.\n";
+            cout << "#####  Stack Underflow  #####\n";
         }
+        else
+        {
+            return arr[top--];
+        }
+    }
+    // for checking the value on the top of the stack
+    T peak()
+    {
+        if (!is_Empty())
+        {
+            cout << "#####  Stack is Empty  #####\n";
+        }
+        else
+        {
+            return arr[top];
+        }
+    }
+
+    void sizeOfStack()
+    {
+        cout << (top + 1) << " values in stack.\n";
+    }
 };
 
 // Function to return precedence of operators
 int prec(char c)
 {
-	if (c == '^')
-		return 3;
-	else if (c == '/' || c == '*')
-		return 2;
-	else if (c == '+' || c == '-')
-		return 1;
-	else
-		return -1;
+    if (c == '^')
+        return 3;
+    else if (c == '/' || c == '*')
+        return 2;
+    else if (c == '+' || c == '-')
+        return 1;
+    else
+        return -1;
 }
 
 // The main function to convert infix expression
@@ -114,61 +114,65 @@ int prec(char c)
 void infixToPostfix(string s)
 {
 
-	Stack<char> st(100); // For stack operations, we are using
-					// C++ built in stack
-	string result;
+    Stack<char> st(100); // For stack operations, we are using
+                         // C++ built in stack
+    string result;
 
-	for (int i = 0; i < s.length(); i++) {
-		char c = s[i];
+    for (int i = 0; i < s.length(); i++)
+    {
+        char c = s[i];
 
-		// If the scanned character is
-		// an operand, add it to output string.
-		if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')
-			|| (c >= '0' && c <= '9'))
-			result += c;
+        // If the scanned character is
+        // an operand, add it to output string.
+        if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9'))
+            result += c;
 
-		// If the scanned character is an
-		// ‘(‘, push it to the stack.
-		else if (c == '(')
-			st.push('(');
+        // If the scanned character is an
+        // ‘(‘, push it to the stack.
+        else if (c == '(')
+            st.push('(');
 
-		// If the scanned character is an ‘)’,
-		// pop and to output string from the stack
-		// until an ‘(‘ is encountered.
-		else if (c == ')') {
-			while (st.top() != '(') {
-				result += st.top();
-				st.pop();
-			}
-			st.pop();
-		}
+        // If the scanned character is an ‘)’,
+        // pop and to output string from the stack
+        // until an ‘(‘ is encountered.
+        else if (c == ')')
+        {
+            while (st.top() != '(')
+            {
+                result += st.top();
+                st.pop();
+            }
+            st.pop();
+        }
 
-		// If an operator is scanned
-		else {
-			while (!st.empty()
-				&& prec(s[i]) <= prec(st.top())) {
-				result += st.top();
-				st.pop();
-			}
-			st.push(c);
-		}
-	}
+        // If an operator is scanned
+        else
+        {
+            while (!st.empty() && prec(s[i]) <= prec(st.top()))
+            {
+                result += st.top();
+                st.pop();
+            }
+            st.push(c);
+        }
+    }
 
-	// Pop all the remaining elements from the stack
-	while (!st.empty()) {
-		result += st.top();
-		st.pop();
-	}
+    // Pop all the remaining elements from the stack
+    while (!st.empty())
+    {
+        result += st.top();
+        st.pop();
+    }
 
-	cout << result << endl;
+    cout << result << endl;
 }
 
 // Driver's code
 int main()
 {
-	string exp = "a+b*(c^d-e)^(f+g*h)-i";
+    string exp = "a+b*(c^d-e)^(f+g*h)-i";
 
-	// Function call
-	infixToPostfix(exp);
-	return 0;
+    // Function call
+    infixToPostfix(exp);
+    return 0;
 }

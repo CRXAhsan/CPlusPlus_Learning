@@ -21,9 +21,8 @@ public:
         cout << "\nRight Child Value : " << arr[rightChild];
     }
 
-    void insertInTree(int arr[] , int size)
+    void insertInTree(int arr[], int size)
     {
-        
     }
 
 private:
@@ -36,16 +35,16 @@ int main()
 
     Tree t;
 
-    cout<<"Enter array size : ";
-    cin>> size;
+    cout << "Enter array size : ";
+    cin >> size;
 
     int arr[size];
 
-    cout<<"Array Elements\n";
+    cout << "Array Elements\n";
     for (int i = 0; i < size; i++)
     {
         cin >> arr[i];
     }
-    
+
     t.printTree(arr, size);
 }
