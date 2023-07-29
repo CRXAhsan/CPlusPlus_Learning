@@ -12,9 +12,9 @@ public:
         next = NULL;
     }
 
-    Node(int a)
+    Node(int data)
     {
-        this->data = a;
+        this->data = data;
         this->next = NULL;
     }
 };
@@ -106,6 +106,53 @@ public:
         {
             cout << temp->data << "\n";
             temp = temp->next;
+        }
+    }
+
+    void print_linked_list_Node_of_specific_position(int pos)
+    {
+        int currntPos = 1;
+        Node *temp;
+        temp = head;
+
+        if (head == NULL)
+        {
+            cout << "linked list is empty...\n";
+        }
+
+        while (currntPos < pos && temp != NULL)
+        {
+            temp = temp->next;
+            currntPos++;
+        }
+        cout << temp->data << "\n";
+    }
+
+    void print_linked_list_from_specfic_node_to_specific_node(int startPos, int endPos)
+    {
+        int currntPos = 1;
+        Node *temp;
+        temp = head;
+
+        if (head == NULL)
+        {
+            cout << "linked list is empty...\n";
+        }
+
+        while (currntPos < startPos && temp != NULL)
+        {
+            temp = temp->next;
+            currntPos++;
+        }
+
+        if (currntPos == startPos)
+        {
+            while (startPos <= endPos && temp != NULL)
+            {
+                cout << temp->data << "\n";
+                temp = temp->next;
+                startPos++;
+            }
         }
     }
 
@@ -267,7 +314,7 @@ public:
         }
     }
 
-    void size_of_linkedList()
+    int size_of_linkedList()
     {
         int count = 0;
         Node *temp = head;
@@ -277,13 +324,37 @@ public:
             count++;
             temp = temp->next;
         }
-        cout << count << " elments present in the linked list\n";
+        return count;
+    }
+
+    void middle_of_linked_list()
+    {
+        int middle = (size_of_linkedList() / 2) + 1;
+
+        print_linked_list_Node_of_specific_position(middle);
+    }
+
+    int count_no_of_specific_data_in_the_linked_list(int data)
+    {
+        Node *temp = head;
+        int count = 0;
+
+        while (temp != 0)
+        {
+            if (data == temp->data)
+            {
+                count++;
+            }
+
+            temp = temp->next;
+        }
+        return count;
     }
 };
 
 int main()
 {
-    int choice, data, pos, update;
+    int choice, data, pos, update, pos1;
 
     linkedList list;
     do
@@ -302,6 +373,10 @@ int main()
         cout << "9.  Updata From Specific Position.\n";
         cout << "10. Update From Specific Data.\n";
         cout << "11. for size of linked list\n";
+        cout << "12. Print linked list Node of specfic position\n";
+        cout << "13. Print linked list from specific Node Position to specfic Node position\n";
+        cout << "14. Print Middle elemnt of the linked list\n";
+        cout << "15. Count How many existances of a single data are present in the given linked list\n";
         cout << "0.  for exit\n";
         cin >> choice;
 
@@ -368,8 +443,31 @@ int main()
             break;
 
         case 11:
-            list.size_of_linkedList();
+            cout << "Size of linked List: " << list.size_of_linkedList()<<"\n";
             break;
+
+        case 12:
+            cout << "Enter pos of node of linkedlist\n";
+            cin >> pos;
+            
+            list.print_linked_list_Node_of_specific_position(pos);
+            break;
+
+        case 13:
+            cout << "Enter the starting Position.\n";
+            cin >> pos;
+            cout << "Enter the Ending Position.\n";
+            cin >> pos1;
+            list.print_linked_list_from_specfic_node_to_specific_node(pos, pos1);
+            break;
+
+        case 14:
+            list.middle_of_linked_list();
+            break;
+        case 15:
+            cout << "Enter the data whom occurence you want to find\n";
+            cin >> data;
+            cout<<"Total Exixtence of "<<data<<" is "<<list.count_no_of_specific_data_in_the_linked_list(data)<<"\n";
         }
     } while (choice != 0);
 }
