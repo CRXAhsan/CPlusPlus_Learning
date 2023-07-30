@@ -350,6 +350,37 @@ public:
         }
         return count;
     }
+
+    void check_if_linked_list_is_circular_or_not()
+    {
+        if (head == NULL)
+        {
+            cout<<"linked list is empty...\n";
+        }
+        else 
+        {
+            Node *temp = head;
+            while (temp != NULL && temp != head)
+            {
+                temp= temp->next;
+            }
+
+            if (temp == head)
+            {
+                cout<<"Circular LINKED list...\n";
+            }
+            else
+            {
+                cout<<"Not Circular LINKED list...\n";
+            }
+            
+            
+        }
+        
+        
+    }
+
+    
 };
 
 int main()
@@ -443,13 +474,13 @@ int main()
             break;
 
         case 11:
-            cout << "Size of linked List: " << list.size_of_linkedList()<<"\n";
+            cout << "Size of linked List: " << list.size_of_linkedList() << "\n";
             break;
 
         case 12:
             cout << "Enter pos of node of linkedlist\n";
             cin >> pos;
-            
+
             list.print_linked_list_Node_of_specific_position(pos);
             break;
 
@@ -467,7 +498,7 @@ int main()
         case 15:
             cout << "Enter the data whom occurence you want to find\n";
             cin >> data;
-            cout<<"Total Exixtence of "<<data<<" is "<<list.count_no_of_specific_data_in_the_linked_list(data)<<"\n";
+            cout << "Total Exixtence of " << data << " is " << list.count_no_of_specific_data_in_the_linked_list(data) << "\n";
         }
     } while (choice != 0);
 }
