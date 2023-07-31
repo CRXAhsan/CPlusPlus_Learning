@@ -34,6 +34,16 @@ public:
         Node *temp = head;
         Node *newNode = new Node(a);
 
+        if (head == NULL)
+        {
+            head = newNode;
+        }
+        else
+        {
+            
+        }
+        
+
         temp =head->next;
         head = newNode;
         newNode = temp;
@@ -384,7 +394,7 @@ public:
         
     }
 
-    
+
 };
 
 int main()
