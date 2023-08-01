@@ -42,7 +42,6 @@ public:
         {
             
         }
-        
 
         temp =head->next;
         head = newNode;
