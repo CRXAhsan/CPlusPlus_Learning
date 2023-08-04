@@ -73,7 +73,7 @@ void subArrayOfGivenSum(int *arr, int size)
                 {
                     cout << arr[k] << " , ";
                 }
-                cout<<"\n";
+                cout << "\n";
                 count++;
             }
         }

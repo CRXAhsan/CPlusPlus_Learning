@@ -355,32 +355,26 @@ public:
     {
         if (head == NULL)
         {
-            cout<<"linked list is empty...\n";
+            cout << "linked list is empty...\n";
         }
-        else 
+        else
         {
             Node *temp = head;
             while (temp != NULL && temp != head)
             {
-                temp= temp->next;
+                temp = temp->next;
             }
 
             if (temp == head)
             {
-                cout<<"Circular LINKED list...\n";
+                cout << "Circular LINKED list...\n";
             }
             else
             {
-                cout<<"Not Circular LINKED list...\n";
+                cout << "Not Circular LINKED list...\n";
             }
-            
-            
         }
-        
-        
     }
-
-    
 };
 
 int main()

@@ -49,8 +49,6 @@ int main()
         cin >> arr[i];
     }
 
-    
-
     cout << "##### Before Sorting #####\n\n";
     for (int i = 0; i < size; i++)
     {
@@ -58,7 +56,7 @@ int main()
     }
     cout << "\n\n##########################\n\n";
 
-    quickSort(arr, 0, size-1);
+    quickSort(arr, 0, size - 1);
 
     cout << "##### After Sorting #####\n\n";
     for (int i = 0; i < size; i++)

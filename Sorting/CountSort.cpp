@@ -13,7 +13,7 @@ void CountSort(int arr[], int size)
         }
     }
 
-    int count[k] {0};
+    int count[k]{0};
 
     for (int i = 0; i < size; i++)
     {
@@ -51,7 +51,7 @@ int main()
         cin >> arr[i];
     }
 
-        cout << "##### Before Sorting #####\n\n";
+    cout << "##### Before Sorting #####\n\n";
     for (int i = 0; i < size; i++)
     {
         cout << arr[i] << " , ";

@@ -1,111 +1,111 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
 
-template <typename T> 
+template <typename T>
 class Stack
 {
-    private:
-        int size;
-        int top;
-        T* arr;
-        
-    public:
-        Stack(int size)
-        {
-            this->size=size;
-            // dynamically allocate the memory so that we can make user defined array stack
-            arr = new T[size]; 
-            top=-1;
-        }
+private:
+    int size;
+    int top;
+    T *arr;
 
-        ~Stack()
-        {
-            //free the memory which we use for making our stack
-            delete[] arr;
-        }
+public:
+    Stack(int size)
+    {
+        this->size = size;
+        // dynamically allocate the memory so that we can make user defined array stack
+        arr = new T[size];
+        top = -1;
+    }
 
-        bool is_Empty()
-        {
-            if (top < 0 )
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            } 
-        }
+    ~Stack()
+    {
+        // free the memory which we use for making our stack
+        delete[] arr;
+    }
 
-        bool is_Full()
+    bool is_Empty()
+    {
+        if (top < 0)
         {
-            if (top < size)
-            {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
 
-                return true;
-            }
-            else
-            {
-                return false;
-            } 
-        }
+    bool is_Full()
+    {
+        if (top < size)
+        {
 
-        void push(T a)
-        {
-            if (!is_Full())
-            {
-                cout<<"#####  Stack Overflow  #####\n";
-            }
-            else
-            {
-                arr[++top] = a ;
-                cout<<arr[top]<<"  Pushed into Stack\n";
-            }
+            return true;
         }
+        else
+        {
+            return false;
+        }
+    }
 
-        // for adding any value to the stack
-        void pop()
+    void push(T a)
+    {
+        if (!is_Full())
         {
-            if (!is_Empty())
-            {
-                cout<<"#####  Stack Underflow  #####\n";
-            }
-            else
-            {
-                cout<<arr[top]<<"  Popped from Stack\n";
-                cout<<arr[top--]<<"\n";
-            }
+            cout << "#####  Stack Overflow  #####\n";
         }
-        // for checking the value on the top of the stack
-        T peak()
+        else
         {
-            if (!is_Empty())
-            {
-                cout<<"#####  Stack is Empty  #####\n";
-            }
-            else
-            {
-                return arr[top];
-            }
+            arr[++top] = a;
+            cout << arr[top] << "  Pushed into Stack\n";
         }
+    }
 
-        void sizeOfStack()
+    // for adding any value to the stack
+    void pop()
+    {
+        if (!is_Empty())
         {
-            cout<<(top+1)<<" values in stack.\n";
+            cout << "#####  Stack Underflow  #####\n";
         }
+        else
+        {
+            cout << arr[top] << "  Popped from Stack\n";
+            cout << arr[top--] << "\n";
+        }
+    }
+    // for checking the value on the top of the stack
+    T peak()
+    {
+        if (!is_Empty())
+        {
+            cout << "#####  Stack is Empty  #####\n";
+        }
+        else
+        {
+            return arr[top];
+        }
+    }
+
+    void sizeOfStack()
+    {
+        cout << (top + 1) << " values in stack.\n";
+    }
 };
 
 int main()
 {
     string variable_1;
     int n;
-    int count=0;
+    int count = 0;
 
-    cout<<"Enter String : ";
-    cin >>variable_1;
+    cout << "Enter String : ";
+    cin >> variable_1;
 
     n = variable_1.length();
 
-    Stack <char> stack1(n);
+    Stack<char> stack1(n);
 
     for (int i = 0; i < n; i++)
     {
@@ -119,18 +119,14 @@ int main()
             stack1.pop();
             count++;
         }
-        
     }
-    cout<<"####  Conditions For Palindrome ####\n\n";
+    cout << "####  Conditions For Palindrome ####\n\n";
     if (count == n)
     {
-        cout<<"Palindrome\n\n";
+        cout << "Palindrome\n\n";
     }
-    else{
-        cout<<"Not Palidrome\n\n";
+    else
+    {
+        cout << "Not Palidrome\n\n";
     }
-    
-    
-    
-
 }
